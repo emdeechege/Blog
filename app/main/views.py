@@ -66,3 +66,25 @@ def admin_dashboard():
         abort(403)
 
     return render_template('admin_dashboard.html', title="Dashboard")
+
+@main.route('/blog/', methods = ['GET','POST'])
+@login_required
+def new_blog():
+
+    form = BlogForm()
+
+    if form.validate_on_submit():
+        topic = form.topi.data
+        content= form.content.data
+        title=form.title.data
+
+        # Updated bloginstance
+        new_blog = Blogs(title=title,topic= topic,content= content,user_id=current_user.id)
+
+        title='New Blog'
+
+        new_blog.save_blog()
+
+        return redirect(url_for('main.index'))
+
+    return render_template('blog.html',blog_entry= form)

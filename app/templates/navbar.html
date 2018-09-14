@@ -25,12 +25,20 @@
     <ul class="nav navbar-nav navbar-right">
       {% if current_user.is_authenticated %}
       {% if current_user.is_admin %}
-        <li><a href="{{ url_for('main.admin_dashboard') }}">Dashboard</a></li>
-        <li><a href="#">Blogs</a></li>
-        <li><a href="#">Users</a></li>
+        <li>
+          <a class="nav-link" href="{{ url_for('main.admin_dashboard') }}">Dashboard</a>
+        </li>
+        <li>
+          <a  class="nav-link" href="#">Blogs</a>
+        </li>
+        <li>
+          <a class="nav-link" href="#">Users</a>
+        </li>
 
       {% else %}
-        <li><a href="{{ url_for('main.admin_dashboard') }}">Dashboard</a></li>
+        <li>
+          <a class="nav-link" href="{{ url_for('main.admin_dashboard') }}">Dashboard</a>
+        </li>
       {% endif %}
       <li>
         <a class="nav-link" href="{{url_for('main.profile',uname=current_user.author)}}">Profile</a>

@@ -23,7 +23,7 @@ def login():
 
         flash('Invalid author or Password')
 
-    title = "Pitches login"
+    title = "Emdee's Blog login"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
 @auth.route('/register',methods = ["GET","POST"])
