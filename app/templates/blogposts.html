@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for blogpost in blogposts %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ blogpost.author }}</a>
+      <small class="text-muted">{{ blogpost.time }}</small>
+    </div>
+
+    <h2><a class="article-title" href="{{ url_for('main.blogpost', blogpost_id=blogpost.id) }}">{{ blogpost.title }}</a></h2>
+    <p class="article-content">{{ blogpost.content }}</p>
+     <p class="article-content">{{ blogpost.topic }}</p>
+  </div>
+</article>
+{% endfor %}
+  </div>
+  {% endblock content %}
