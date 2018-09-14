@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField,SelectField
+from wtforms import StringField,TextAreaField,SubmitField
 from wtforms.validators import Required
 
 class UpdateProfile(FlaskForm):
@@ -8,6 +8,6 @@ class UpdateProfile(FlaskForm):
 
 class BlogForm(FlaskForm):
     title = StringField('Blog Title')
-    topic = SelectField(u'Topic')
+    topic = StringField(u'Topic')
     content = TextAreaField('Blog Content')
     submit = SubmitField('Submit')

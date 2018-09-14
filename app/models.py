@@ -17,7 +17,7 @@ class User(UserMixin,db.Model):
     password_hash = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    blog = db.relationship('Blogs', backref='author', lazy='dynamic')
+    blogpost = db.relationship('Blogs', backref='author', lazy='dynamic')
     comments = db.relationship('Comments', backref='author', lazy='dynamic')
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     is_admin = db.Column(db.Boolean, default=False)
@@ -47,17 +47,17 @@ class Blogs(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     comments = db.relationship('Comments', backref='title', lazy='dynamic')
 
-    def save_blog(self):
-        db.session.add(self)
+    def save_blog(self,blogpost):
+        db.session.add(blogpost)
         db.session.commit()
 
     @classmethod
-    def get_blogs(cls,top):
-        blog = Blogs.query.filter_by(topic=top).all()
-        return blog
+    def get_blogposts(id):
+        blogpost = Blogs.query.filter_by(title=title).all()
+        return blogpost
 
     def __repr__(self):
-        return f"Blogs {self.blog}','{self.date}')"
+        return f"Blogs {self.id}','{self.DateTime}')"
 
 class Comments(db.Model):
     __tablename__ = 'comments'

@@ -74,17 +74,29 @@ def new_blog():
     form = BlogForm()
 
     if form.validate_on_submit():
-        topic = form.topi.data
+
+        topic = form.topic.data
         content= form.content.data
         title=form.title.data
 
         # Updated bloginstance
-        new_blog = Blogs(title=title,topic= topic,content= content,user_id=current_user.id)
+        blogpost = Blogs(title=title,topic= topic,content= content,user_id=current_user.id)
+        db.session.add(blogpost)
+        db.session.commit()
 
         title='New Blog'
 
-        new_blog.save_blog()
+        # new_blog.save_blog()
+        print('meeee')
 
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.single_blog',id=blogpost.id))
 
-    return render_template('blog.html',blog_entry= form)
+    return render_template('blog.html',blogpost_form= form)
+
+#ability to view single blog posts
+@main.route('/blog/<int:id>')
+def single_blog(id):
+
+    blogpost = Blogs.query.get(id)
+
+    return render_template('oneblogpost.html',blogpost=blogpost)
