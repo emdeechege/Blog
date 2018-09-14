@@ -100,3 +100,52 @@ def single_blog(id):
     blogpost = Blogs.query.get(id)
 
     return render_template('oneblogpost.html',blogpost=blogpost)
+
+@main.route('/allblogposts')
+def blogpost_list():
+    # Function that renders the business category blogpost and its content
+
+    blogposts = Blogpost.query.all()
+
+    return render_template('blogposts.html', blogposts=blogposts)
+
+
+# VIEWING A blogpost WITH COMMENTS AND COMMENTFORM
+@main.route('/blog/<int:id>/',methods=["GET","POST"])
+def blogpost(id):
+    blogpost = Blogs.query.get(id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        comment = form.comment.data
+        new_blogpost_comment = Comments(comment=comment,blogs=blogs_id,user=current_user.id)
+        # new_post_comment.save_post_comments()
+        db.session.add(new_blogpost_comment)
+        db.session.commit()
+    comments = Comment.query.all()
+    return render_template('blogview.html',title=blogpost.title,blogpost=blogpost,blogpost_form=form,comments=comments)
+
+# ADDING A NEW COMMENT TO A blogpost
+@main.route('/blog/comment/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    '''
+    view category that returns a form to create a new comment
+    '''
+    form = CommentForm()
+    blogpost = Blogs.query.filter_by(id = id).first()
+
+    if form.validate_on_submit():
+
+        comment = form.comment.data
+
+        # comment instance
+        new_comment = Comment(blogpost_id = blogpost.id, post_comment = comment,user = current_user.id)
+
+        # save comment
+        new_comment.save_comment()
+
+        return redirect(url_for('.blog', id = blogpost.id ))
+
+    title = f'{blogpost.title} comment'
+    return render_template('newcomment.html', title = title, comment_form = form, blogpost = blogpost, )
