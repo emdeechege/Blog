@@ -19,6 +19,8 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     blog = db.relationship('Blogs', backref='author', lazy='dynamic')
     comments = db.relationship('Comments', backref='author', lazy='dynamic')
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+    is_admin = db.Column(db.Boolean, default=False)
 
 #to link tables what you add after backref matters
     @property
@@ -76,3 +78,19 @@ class Comments(db.Model):
 
     def __repr__(self):
         return f"Comments('{self.comment}', '{self.date_posted}')"
+
+class Role(db.Model):
+    """
+    Create a Role table
+    """
+
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), unique=True)
+    description = db.Column(db.String(200))
+    user = db.relationship('User', backref='role',
+                                lazy='dynamic')
+
+    def __repr__(self):
+        return '<Role: {}>'.format(self.name)
