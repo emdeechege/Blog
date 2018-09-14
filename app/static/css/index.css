@@ -1,0 +1,6 @@
+.jumbotron {
+    /* background: none; */
+    min-height: 100vh;
+    margin-bottom: 0;
+    background-color: red;
+}

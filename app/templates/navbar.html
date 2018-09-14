@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="{{url_for('static',filename='css/navbar.css')}}">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg" style="background-color: transparent;">
+  <a class="navbar-brand" href="/">Emdee's Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li >
+        <a class="nav-link" href="/categories/life">Life</a>
+      </li>
+      <li >
+        <a class="nav-link" href="/categories/coding">Coding</a>
+      </li>
+      <li >
+        <a class="nav-link" href="/categories/funny">Funny</a>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      {% if current_user.is_authenticated %}
+      <li>
+        <a class="nav-link" href="{{url_for('main.profile',uname=current_user.author)}}">Dashboard</a>
+      </li>
+      <li>
+        <a class="nav-link" href="{{url_for('main.profile',uname=current_user.author)}}">Profile</a>
+      </li>
+      <li >
+        <a class="nav-link" href="{{url_for('auth.logout')}}">Sign out</a>
+      </li>
+      {% else %}
+      <li >
+        <a class="nav-link" href="{{url_for('auth.login')}}">Sign in</a>
+      </li>
+      {%endif%}
+    </ul>
+  </div>
+</nav>

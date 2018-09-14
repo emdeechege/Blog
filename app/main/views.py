@@ -12,9 +12,10 @@ def index():
     my index page
     return
     '''
-    message= "Hello"
+    
+
     title= "Emdee's Blog"
-    return render_template('index.html', message=message,title=title)
+    return render_template('index.html',title=title)
 
 @main.route('/user/<uname>')
 def profile(uname):

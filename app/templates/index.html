@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"> {% endblock %}
+{% block content %}
+
+<body>
+  <div class="jumbotron">
+    <div class="container text-center" id="landing">
+      <h1>Event</h1><br>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.</p>
+      <button type="button" class="btn btn-default">Learn More</button>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+   <footer>
+     <div class="container">
+       <div class="row">
+         <div class="col-lg-8 col-md-10 mx-auto">
+           <p class="copyright text-muted">Copyright &copy; Emdee's Blog 2018</p>
+         </div>
+       </div>
+     </div>
+   </footer>
+  {% endblock%}
+</body>
