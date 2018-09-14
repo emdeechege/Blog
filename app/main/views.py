@@ -93,7 +93,7 @@ def new_blog():
 
     return render_template('blog.html',blogpost_form= form)
 
-#ability to view single blog posts
+#ability to view single blog addition
 @main.route('/blog/<int:id>')
 def single_blog(id):
 
@@ -110,7 +110,7 @@ def blogpost_list():
     return render_template('blogposts.html', blogposts=blogposts)
 
 
-# VIEWING A blogpost WITH COMMENTS AND COMMENTFORM
+# viewing comments and respective posts
 @main.route('/blog/<int:id>/',methods=["GET","POST"])
 def blogpost(id):
     blogpost = Blogs.query.get(id)
@@ -125,7 +125,7 @@ def blogpost(id):
     comments = Comment.query.all()
     return render_template('blogview.html',title=blogpost.title,blogpost=blogpost,blogpost_form=form,comments=comments)
 
-# ADDING A NEW COMMENT TO A blogpost
+# collect new comments on Blog posts
 @main.route('/blog/comment/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_comment(id):
