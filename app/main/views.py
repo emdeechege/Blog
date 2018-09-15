@@ -81,6 +81,7 @@ def new_blog():
 
         # Updated bloginstance
         blogpost = Blogs(title=title,topic= topic,content= content,user_id=current_user.id)
+
         db.session.add(blogpost)
         db.session.commit()
 
@@ -111,41 +112,44 @@ def blogpost_list():
 
 
 # viewing comments and respective posts
-@main.route('/blog/new/<int:id>/',methods=["GET","POST"])
-def blogpost(id):
-    blogpost = Blogs.query.get(id)
+@main.route('/blog/new/<int:blogs_id>/',methods=["GET","POST"])
+@login_required
+def blogpost(blogs_id):
+    blogpost = Blogs.query.filter_by(id=blogs_id).first()
     form = CommentForm()
     if form.validate_on_submit():
-        title = form.title.data
+
         comment = form.comment.data
-        new_blogpost_comment = Comments(comment=comment,blogs=blogs_id,user=current_user.id)
+        new_blogpost_comment = Comments(comment=comment,blogs_id=blogs_id,user_id=current_user.id)
         # new_post_comment.save_post_comments()
         db.session.add(new_blogpost_comment)
         db.session.commit()
-    comments = Comments.query.all()
-    return render_template('blogcommentlink.html',title=blogpost.title,blogpost=blogpost,blogpost_form=form,comments=comments)
 
-# collect new comments on Blog posts
-@main.route('/blog/comment/<int:id>', methods = ['GET','POST'])
-@login_required
-def new_comment(id):
-    '''
-    view category that returns a form to create a new comment
-    '''
-    form = CommentForm()
-    blogpost = Blogs.query.filter_by(id = id).first()
+    comments = Comments.get_comment(blogs_id)
 
-    if form.validate_on_submit():
+    return render_template('blogcommentlink.html',blogpost=blogpost,blogpost_form=form,comments=comments)
 
-        comment = form.comment.data
-
-        # comment instance
-        new_comment = Comments(blogs_id = id, comment = comment)
-
-        # save comment
-        new_comment.save_comment()
-
-        return redirect(url_for('main.blogpost', id = blogpost.id ))
-
-    title = f'{blogpost.title} comment'
-    return render_template('newcomment.html', title = title, comment_form = form, blogpost = blogpost, )
+# # collect new comments on Blog posts
+# @main.route('/blog/comment/<int:blogs_id>', methods = ['GET','POST'])
+# @login_required
+# def new_comment(blogs_id):
+#     '''
+#     view category that returns a form to create a new comment
+#     '''
+#     form = CommentForm()
+#     blogpost = Blogs.query.filter_by(id = blogs_id).first()
+#
+#     if form.validate_on_submit():
+#
+#         comment = form.comment.data
+#
+#         # comment instance
+#         new_comment = Comments(blogs_id = blogs_id, comment = comment)
+#
+#         # save comment
+#         new_comment.save_comment()
+#
+#         # return redirect(url_for('main.blogpost', id = blogpost.id ))
+#
+#     title = f'{blogpost.title} comment'
+#     return render_template('newcomment.html',comment_form = form, blogpost = blogpost, )

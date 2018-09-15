@@ -1,44 +1,38 @@
 {% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block content %}
 
-<div class="container" style="text-align:center";>
-<h1>BLOGPOSTS</h1>
-<article class="media content-section">
-  <div class="media-body">
-    <div class="article-metadata">
-      <a class="mr-2" href="#">{{ blogpost.author }}</a>
-      <small class="text-muted">{{ blogpost.time }}</small>
+<div class="container" style="text-align:center" ;>
+  <h1>BLOGPOSTS</h1>
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ blogpost.author }}</a>
+        <small class="text-muted">{{ blogpost.time }}</small>
 
+      </div>
+      <h2 class="article-title">{{ blogpost.title }}</h2>
+      <p class="article-content">{{ blogpost.content }}</p>
     </div>
-    <h2 class="article-title">{{ blogpost.title }}</h2>
-    <p class="article-content">{{ blogpost.content }}</p>
-  </div>
 
 
-</article>
+  </article>
 
 
-{{wtf.quick_form(blogpost_form)}}
+  <button>{{wtf.quick_form(blogpost_form)}}</button>
 
   {% for comment in comments[::-1] %}
 
 
   <article class="">
-  <div class="media-body">
-    <div class="article-metadata">
-      <a class="mr-2" href="#">{{ blogpost.author }}</a>
-      <small class="text-muted">{{ blogpost.date }}</small>
-    </div>
-    <p class="article-content">{{ comment.content }}</p>
-  </div>
-  <div class="media">
-    <img class="mr-3" src="..." alt="Generic placeholder image">
     <div class="media-body">
-      <h5 class="mt-0">{{blogpost.comment}}</h5>
+      <div class="article-metadata">
+        <p class="article-content">{{ comment.comment }}</p>
+      </div>
 
+      <small><a class="mr-2" href="#">{{ comment.author }}</a></small>
+      <small class="text-muted">{{ blogpost.date.strftime('%B %d, %Y') }}</small>
     </div>
-  </div>
-</article>
-{% endfor %}
+  </article>
+  {% endfor %}
 
 </div>
 {% endblock content %}
