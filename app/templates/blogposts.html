@@ -3,6 +3,10 @@
 {% block content %}
 
 {% for blogpost in blogposts %}
+<body>
+<br>
+<br>  
+
 <div class="container">
     <div class="media">
     <div class="media-left media-top">
@@ -16,10 +20,10 @@
     <small><a class="mr-2" href="#">{{ blogpost.author }}</a></small>
     <small class="text-muted">{{ blogpost.date.strftime('%B %d, %Y') }}</small>
     <hr>
-    {% endfor %}
+
 </div>
       <!-- Nested media object -->
-{% for comment in comments[::-1] %}
+
       <div class="media">
         <div class="media-left">
           <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Round&hairColor=BlondeGolden&facialHairType=Blank&facialHairColor=Red&clotheType=GraphicShirt&clotheColor=PastelGreen&graphicType=Skull&eyeType=Squint&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Pale" class="media-object" style="width:45px">
@@ -35,3 +39,4 @@
   {% endfor %}
 </div>
 {% endblock content %}
+</body>

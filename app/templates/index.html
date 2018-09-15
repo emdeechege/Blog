@@ -14,7 +14,8 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       {% for blog in blogs %}
       <div class="preview">
-        <h2 class="title">{{ blog.title }}</h2>
+            <a href="blog/{{ blog.id }}">
+        <h2 class="title">{{ blog.title }}</h2></a>
         <p class="post-meta">Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
       </div>
       {% endfor %}
