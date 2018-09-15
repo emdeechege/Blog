@@ -10,7 +10,7 @@
       <small class="text-muted">{{ blogpost.time }}</small>
     </div>
 
-    <h2><a class="article-title" href="{{ url_for('main.blogpost', blogpost_id=blogpost.id) }}">{{ blogpost.title }}</a></h2>
+    <h2>{{ blogpost.title }}</a></h2>
     <p class="article-content">{{ blogpost.content }}</p>
      <p class="article-content">{{ blogpost.topic }}</p>
   </div>

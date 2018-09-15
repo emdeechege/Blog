@@ -101,17 +101,17 @@ def single_blog(id):
 
     return render_template('oneblogpost.html',blogpost=blogpost)
 
-@main.route('/allblogposts')
+@main.route('/blogposts')
 def blogpost_list():
     # Function that renders the business category blogpost and its content
 
-    blogposts = Blogpost.query.all()
+    blogposts = Blogs.query.all()
 
     return render_template('blogposts.html', blogposts=blogposts)
 
 
 # viewing comments and respective posts
-@main.route('/blog/<int:id>/',methods=["GET","POST"])
+@main.route('/blog/new/<int:id>/',methods=["GET","POST"])
 def blogpost(id):
     blogpost = Blogs.query.get(id)
     form = CommentForm()
@@ -122,8 +122,8 @@ def blogpost(id):
         # new_post_comment.save_post_comments()
         db.session.add(new_blogpost_comment)
         db.session.commit()
-    comments = Comment.query.all()
-    return render_template('blogview.html',title=blogpost.title,blogpost=blogpost,blogpost_form=form,comments=comments)
+    comments = Comments.query.all()
+    return render_template('blogcommentlink.html',title=blogpost.title,blogpost=blogpost,blogpost_form=form,comments=comments)
 
 # collect new comments on Blog posts
 @main.route('/blog/comment/<int:id>', methods = ['GET','POST'])
@@ -140,12 +140,12 @@ def new_comment(id):
         comment = form.comment.data
 
         # comment instance
-        new_comment = Comment(blogpost_id = blogpost.id, post_comment = comment,user = current_user.id)
+        new_comment = Comments(blogs_id = id, comment = comment)
 
         # save comment
         new_comment.save_comment()
 
-        return redirect(url_for('.blog', id = blogpost.id ))
+        return redirect(url_for('main.blogpost', id = blogpost.id ))
 
     title = f'{blogpost.title} comment'
     return render_template('newcomment.html', title = title, comment_form = form, blogpost = blogpost, )
