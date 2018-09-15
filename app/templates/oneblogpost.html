@@ -11,21 +11,19 @@
   {% block content %}
   <br>
   <br>
+<div class="container">
+  <div class="media">
+    <div class="media-left">
+      <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads02&accessoriesType=Round&hairColor=BlondeGolden&facialHairType=Blank&facialHairColor=Red&clotheType=GraphicShirt&clotheColor=PastelGreen&graphicType=Skull&eyeType=Squint&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Pale" class="media-object" style="width:45px">
+    </div>
+    <div class="media-body">
+      <h6 class="media-heading">{{blogpost.title}}</h6>
 
-  <div class="container">
-    <div class="card-columns">
-
-      <div class="card bg-transparent border-success">
-        <div class="card-header bg-transparent border-success">
-          {{blogpost.title}}
+      <p>{{blogpost.topic}}</p>
+      <p><small><i>{{blogpost.author}} Posted on: {{blogpost.date.strftime('%B %d, %Y')}} </i></small></p>
         </div>
-        <div class="card-body text">
-          <blockquote class="blockquote mb-0">
-            <p>{{blogpost.topic}}</p><br>
-            <footer class="blockquote-footer bg-transparent border-success">{{blogpost.author}}
-              <br><cite title="Source Title">Publish date: {{blogpost.date.strftime('%B %d, %Y')}}</cite></footer>
-          </blockquote>
-        </div>
-      </div>
+  </div>
+  <hr>
       {% endblock %}
+      </div>
 </body>

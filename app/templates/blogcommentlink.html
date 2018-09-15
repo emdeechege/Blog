@@ -1,38 +1,33 @@
 {% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %} {% block content %}
-
-<div class="container" style="text-align:center" ;>
-  <h1>BLOGPOSTS</h1>
-  <article class="media content-section">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="#">{{ blogpost.author }}</a>
-        <small class="text-muted">{{ blogpost.time }}</small>
-
-      </div>
-      <h2 class="article-title">{{ blogpost.title }}</h2>
-      <p class="article-content">{{ blogpost.content }}</p>
+<br>
+<br>
+<div class="container">
+  <div class="media">
+    <div class="media-left">
+      <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=EyeRoll&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Black" class="media-object" style="width:45px">
     </div>
-
-
-  </article>
-
-
-  <button>{{wtf.quick_form(blogpost_form)}}</button>
-
-  {% for comment in comments[::-1] %}
-
-
-  <article class="">
     <div class="media-body">
-      <div class="article-metadata">
-        <p class="article-content">{{ comment.comment }}</p>
-      </div>
+      <h4 class="media-heading">{{ blogpost.title }} </h4>
+      <h5 class="media-heading">{{ blogpost.topic }} </h5>
+      <p>{{ blogpost.content }}</p>
+      <small><i>{{ blogpost.author }} Posted on {{ blogpost.date.strftime('%B %d, %Y') }}</i></small>
+      <hr>
+      {{wtf.quick_form(blogpost_form)}}
+      <br>
+{% for comment in comments[::-1] %}
+      <!-- Nested media object -->
+    
+        <div class="media-left">
+          <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairBun&accessoriesType=Prescription01&hairColor=SilverGray&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Close&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=DarkBrown" class="media-object" style="width:45px">
+        </div>
+        <div class="media-body">
+          <p>{{ comment.comment }}</p>
+          <small><i>{{ comment.author }} Posted on {{ comment.date_posted.strftime('%B %d, %Y') }}</i></small>
 
-      <small><a class="mr-2" href="#">{{ comment.author }}</a></small>
-      <small class="text-muted">{{ blogpost.date.strftime('%B %d, %Y') }}</small>
-    </div>
-  </article>
+
+
   {% endfor %}
 
 </div>
+<br>
 {% endblock content %}

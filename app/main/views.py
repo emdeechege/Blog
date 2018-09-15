@@ -102,9 +102,10 @@ def single_blog(id):
 
 @main.route('/blogposts')
 def blogpost_list():
-    # Function that renders the business category blogpost and its content
+    # Function that renders all blogposts and its content
 
     blogposts = Blogs.query.all()
+
 
     return render_template('blogposts.html', blogposts=blogposts)
 

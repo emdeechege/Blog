@@ -16,14 +16,16 @@
       <div class="preview">
             <a href="blog/{{ blog.id }}">
         <h2 class="title">{{ blog.title }}</h2></a>
-        <p class="post-meta">Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
+        <p>{{ blog.content}}</p>
+        <small><p><a href="blog/new/{{ blog.id }}">View Comments</p></a></small>
+        <p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
       </div>
       {% endfor %}
       <hr>
     </div>
   </div>
   </div>
-
+/blog/new/
   <!-- Footer -->
   <footer>
     <div class="container">
