@@ -4,24 +4,34 @@
 {% block content %}
 
 <body>
-  <div class="jumbotron">
-    <div class="container text-center" id="landing">
-      <h1>Event</h1><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu placerat eros, sed interdum lectus.</p>
-      <button type="button" class="btn btn-default">Learn More</button>
+
+  <div class="jumbotron text-center" style="background-image: url('{{ url_for('static', filename='./photos/two.jpeg') }}')">
+
+    <h1>Emdee's Blog</h1><br>
+    <small><h4>Express yourself..</h4></small>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      {% for blog in blogs %}
+      <div class="preview">
+        <h2 class="title">{{ blog.title }}</h2>
+        <p class="post-meta">Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
+      </div>
+      {% endfor %}
+      <hr>
     </div>
   </div>
-
+  </div>
 
   <!-- Footer -->
-   <footer>
-     <div class="container">
-       <div class="row">
-         <div class="col-lg-8 col-md-10 mx-auto">
-           <p class="copyright text-muted">Copyright &copy; Emdee's Blog 2018</p>
-         </div>
-       </div>
-     </div>
-   </footer>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p class="copyright text-muted">Copyright &copy; Emdee's Blog 2018</p>
+        </div>
+      </div>
+    </div>
+  </footer>
   {% endblock%}
 </body>

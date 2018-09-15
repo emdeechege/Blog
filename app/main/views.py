@@ -12,10 +12,11 @@ def index():
     my index page
     return
     '''
+    blogs = Blogs.query.order_by(Blogs.date.desc()).all()
 
 
     title= "Emdee's Blog"
-    return render_template('index.html',title=title)
+    return render_template('index.html',title=title, blogs=blogs)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -87,9 +88,6 @@ def new_blog():
 
         title='New Blog'
 
-        # new_blog.save_blog()
-        print('meeee')
-
         return redirect(url_for('main.single_blog',id=blogpost.id))
 
     return render_template('blog.html',blogpost_form= form)
@@ -128,28 +126,3 @@ def blogpost(blogs_id):
     comments = Comments.get_comment(blogs_id)
 
     return render_template('blogcommentlink.html',blogpost=blogpost,blogpost_form=form,comments=comments)
-
-# # collect new comments on Blog posts
-# @main.route('/blog/comment/<int:blogs_id>', methods = ['GET','POST'])
-# @login_required
-# def new_comment(blogs_id):
-#     '''
-#     view category that returns a form to create a new comment
-#     '''
-#     form = CommentForm()
-#     blogpost = Blogs.query.filter_by(id = blogs_id).first()
-#
-#     if form.validate_on_submit():
-#
-#         comment = form.comment.data
-#
-#         # comment instance
-#         new_comment = Comments(blogs_id = blogs_id, comment = comment)
-#
-#         # save comment
-#         new_comment.save_comment()
-#
-#         # return redirect(url_for('main.blogpost', id = blogpost.id ))
-#
-#     title = f'{blogpost.title} comment'
-#     return render_template('newcomment.html',comment_form = form, blogpost = blogpost, )
