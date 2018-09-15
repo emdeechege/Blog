@@ -92,13 +92,13 @@ def new_blog():
 
     return render_template('blog.html',blogpost_form= form)
 
-# #ability to view single blog addition
-# @main.route('/blog/<int:id>')
-# def single_blog(id):
-#
-#     blogpost = Blogs.query.get(id)
-#
-#     return render_template('oneblogpost.html',blogpost=blogpost)
+#ability to view single blog addition
+@main.route('/blog/<int:id>')
+def single_blog(id):
+
+    blogpost = Blogs.query.get(id)
+
+    return render_template('oneblogpost.html',blogpost=blogpost)
 
 @main.route('/blogposts')
 def blogpost_list():
@@ -120,10 +120,24 @@ def blogpost(blogs_id):
 
         comment = form.comment.data
         new_blogpost_comment = Comments(comment=comment,blogs_id=blogs_id,user_id=current_user.id)
-        # new_post_comment.save_post_comments()
+
         db.session.add(new_blogpost_comment)
         db.session.commit()
 
     comments = Comments.get_comment(blogs_id)
 
     return render_template('blogcommentlink.html',blogpost=blogpost,blogpost_form=form,comments=comments)
+
+@main.route('/blog/<int:id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_blog(id):
+    blogpost = Blogs.query.get_or_404(id)
+    for comment in blogs.comments.all():
+        db.session.delete(comment)
+        db.session.commit()
+    if post.author != is_admin:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    return redirect(url_for('admin_dashboard.html'))
