@@ -14,18 +14,18 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       {% for blog in blogs %}
       <div class="preview">
-            <a href="blog/{{ blog.id }}">
+        <a href="blog/new/{{ blog.id }}">
         <h2 class="title">{{ blog.title }}</h2></a>
+        <p>{{blog.topic}}</p>
         <p>{{ blog.content}}</p>
-        <small><p><a href="blog/new/{{ blog.id }}">View Comments</p></a></small>
-        <p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p>
+        <small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p></small>
       </div>
       {% endfor %}
       <hr>
     </div>
   </div>
   </div>
-/blog/new/
+  /blog/new/
   <!-- Footer -->
   <footer>
     <div class="container">
