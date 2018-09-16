@@ -128,16 +128,24 @@ def blogpost(blogs_id):
 
     return render_template('blogcommentlink.html',blogpost=blogpost,blogpost_form=form,comments=comments)
 
-@main.route('/blog/<int:id>/delete', methods=['GET', 'POST'])
+
+
+@main.route('/blog/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_blog(id):
-    blogpost = Blogs.query.get_or_404(id)
-    for comment in blogs.comments.all():
-        db.session.delete(comment)
-        db.session.commit()
-    if post.author != is_admin:
+    """
+    Delete a blogpost from the database
+    """
+    if not current_user.is_admin:
         abort(403)
-    db.session.delete(post)
+
+    blogpost = Blogs.query.filter_by(id=id).first()
+    
+    db.session.delete(blogpost)
     db.session.commit()
-    flash('Your post has been deleted!', 'success')
-    return redirect(url_for('admin_dashboard.html'))
+
+
+    # redirect to the departments page
+    # return redirect(url_for('main.admin_dashboard'))
+
+    return render_template('main.index', title="Dashboard")
