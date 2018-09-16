@@ -3,15 +3,19 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"> {% endblock %}
 {% block content %}
 
-<body>
+<body style="background-color: #E5DFC6  ;">
 
   <div class="jumbotron text-center" style="background-image: url('{{ url_for('static', filename='./photos/two.jpeg') }}')">
 
-    <h1>Emdee's Blog</h1><br>
+    <h1 class="display-2">Emdee's Blog</h1><br>
     <small><h4>Express yourself..</h4></small>
+    <div class="btn-group mt-2" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary btn-lg">Subscribe</button>
+      <a class="btn btn-secondary btn-lg" href="/blogposts">All Blogs</a>
   </div>
+</div>
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
+    <div class="col-lg-8 col-md-10 mx-auto" >
       {% for blog in blogs %}
       <div class="preview">
         <a href="blog/new/{{ blog.id }}">
@@ -20,6 +24,7 @@
         <p>{{ blog.content}}</p>
         <small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p></small>
       </div>
+      <hr>
       {% endfor %}
       <hr>
     </div>
