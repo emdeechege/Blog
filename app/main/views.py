@@ -181,3 +181,15 @@ def edit_blogpost(id):
     form.topic.data= blogpost.topic
 
     return render_template('blog.html',action="Edit", blogpost_form= form, legend='Update Post')
+
+@main.route('/subscribe', methods=['GET','POST'])
+def subscriber():
+   subscriber_form=SubscriberForm()
+   if subscriber_form.validate_on_submit():
+       subscriber= Subscriber(email=subscriber_form.email.data,title = subscriber_form.title.data)
+       db.session.add(subscriber)
+       db.session.commit()
+       mail_message("Hey Welcome To My Blog ","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
+   subscriber = Blogs.query.all()
+   blog = Blogs.query.all()
+   return render_template('subscribe.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)
