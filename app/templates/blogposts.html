@@ -15,6 +15,7 @@
       <h4 class="media-heading">{{ blogpost.title }}</h4>
       <h6 class="media-heading">{{ blogpost.topic }}</h6>
       <p class="media-content">{{ blogpost.content }}</p>
+      
     </div>
     <small><a class="mr-2" href="#">{{ blogpost.author }}</a></small>
     <small class="text-muted">{{ blogpost.date.strftime('%B %d, %Y') }}</small>
@@ -24,7 +25,6 @@
 
 
   <hr>
-
 
   {% endfor %}
 </div>

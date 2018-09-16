@@ -5,7 +5,6 @@
   <div class="media">
     <div class="media-left">
       <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Blank&facialHairType=Blank&clotheType=BlazerShirt&eyeType=EyeRoll&eyebrowType=UnibrowNatural&mouthType=Smile&skinColor=Black" class="media-object" style="width:45px">
-
     </div>
     <div class="media-body">
       <h4 class="media-heading">{{ blogpost.title }} </h4>
@@ -13,6 +12,8 @@
       <p>{{ blogpost.content }}</p>
       <small><i>{{ blogpost.author }} Posted on {{ blogpost.date.strftime('%B %d, %Y') }}</i></small>
       <hr>
+    
+      <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete  True</button>
 
       <div style="width: 50%">
         {{wtf.quick_form(blogpost_form)}}
@@ -24,15 +25,48 @@
       <div class="media-left">
         <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairBun&accessoriesType=Prescription01&hairColor=SilverGray&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Close&eyebrowType=RaisedExcitedNatural&mouthType=Serious&skinColor=DarkBrown" class="media-object" style="width:45px">
 
+
         </div>
-      <div class="media-body">
-        <p>{{ comment.comment }}</p>
-        <small><i>{{ comment.author }} Posted on {{ comment.date_posted.strftime('%B %d, %Y') }}</i></small>
-
-
-
-        {% endfor %}
-
+<div class="media-body">
+<p>{{ comment.comment }}</p>
+<small><i>{{ comment.author }} Posted on {{ comment.date_posted.strftime('%B %d, %Y') }}</i></small>
+<!-- <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteComment">Delete  True</button> -->
+{% endfor %}
+<!-- delete blog modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Blog?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
       </div>
-      <br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="{{ url_for('main.delete_blog', id=blogpost.id) }}" method="post">
+          <input class="btn btn-danger" type="submit" value="Delete">
+<!-- delete comment -->
+<!-- <div class="modal fade" id="deleteComment" tabindex="-1" role="dialog" aria-labelledby="deleteCommentLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteCommentLabel">Delete Comment?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="{{ url_for('main.delete_comment', id=blogpost.id) }}" method="post">
+          <input class="btn btn-danger" type="submit" value="Delete">
+
+  </form>
+
+                </div>
+              </div> -->
+            </div>
+          </div>
+          <br>
 {% endblock content %}
