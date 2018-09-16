@@ -10,16 +10,18 @@
     <h1>Emdee's Blog</h1><br>
     <small><h4>Express yourself..</h4></small>
   </div>
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      {% for blog in blogs %}
-      <div class="preview">
-        <a href="blog/new/{{ blog.id }}">
-        <h2 class="title">{{ blog.title }}</h2></a>
-        <p>{{blog.topic}}</p>
-        <p>{{ blog.content}}</p>
-        <small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p></small>
-      </div>
+  {% for blog in blogs %}
+  <div class="card mb-3">
+
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <a href="blog/new/{{ blog.id }}">
+      <h5 class="card-title">{{ blog.title }}</h5></a>
+      <p class="card-text">{{ blog.content}}</p>
+      <p class="card-text"><small><p>Posted by {{blog.author }} on {{ blog.date.strftime('%B %d, %Y') }}</p></small></p>
+    </div>
+  </div>
+
       {% endfor %}
       <hr>
     </div>

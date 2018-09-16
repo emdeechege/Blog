@@ -114,14 +114,14 @@ def blogpost_list():
 
 # viewing comments and respective posts
 @main.route('/blog/new/<int:blogs_id>/',methods=["GET","POST"])
-@login_required
+
 def blogpost(blogs_id):
     blogpost = Blogs.query.filter_by(id=blogs_id).first()
     form = CommentForm()
     if form.validate_on_submit():
 
         comment = form.comment.data
-        new_blogpost_comment = Comments(comment=comment,blogs_id=blogs_id,user_id=current_user.id)
+        new_blogpost_comment = Comments(comment=comment,blogs_id=blogs_id)
 
         db.session.add(new_blogpost_comment)
         db.session.commit()
