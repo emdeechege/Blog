@@ -57,7 +57,7 @@ class Blogs(db.Model):
         return blogpost
 
     def __repr__(self):
-        return f"Blogs {self.id}','{self.DateTime}')"
+        return f"Blogs {self.id}','{self.date}')"
 
 class Comments(db.Model):
     __tablename__ = 'comments'

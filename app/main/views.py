@@ -182,6 +182,18 @@ def edit_blogpost(id):
 
     return render_template('blog.html',action="Edit", blogpost_form= form, legend='Update Post')
 
+@main.route('/comment/delete/<int:blogs_id>' ,methods=['GET', 'POST'])
+@login_required
+def delete_comment(blogs_id):
+
+    blogpost = Blogs.query.filter_by(id=blogs_id).first()
+    comment = Comments.query.filter_by(blogs_id=blogs_id).first()
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    return redirect(url_for('main.blogpost', comment=comment, blogpost=blogpost, blogs_id=blogs_id))
+
 @main.route('/subscribe', methods=['GET','POST'])
 def subscriber():
    subscriber_form=SubscriberForm()
@@ -189,7 +201,7 @@ def subscriber():
        subscriber= Subscriber(email=subscriber_form.email.data,title = subscriber_form.title.data)
        db.session.add(subscriber)
        db.session.commit()
-       mail_message("Hey Welcome To My Blog ","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
+       mail_message("Hello, Welcome To Emdee's Blog.","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
    subscriber = Blogs.query.all()
    blog = Blogs.query.all()
    return render_template('subscribe.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)
