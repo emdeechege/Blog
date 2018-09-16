@@ -16,6 +16,8 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     SUBJECT_PREFIX = 'Emdees Blog!'
     SENDER_EMAIL = 'staremdee@gmail.com'
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
 
     @staticmethod
     def init_app(app):

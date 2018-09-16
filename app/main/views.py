@@ -1,10 +1,12 @@
 from flask import render_template
 from flask import render_template,request,redirect,url_for,abort, flash
 from flask_login import login_required,current_user
+from ..email import mail_message
 from ..models import *
 from . import main
 from .. import db,photos
 from .forms import *
+import markdown2
 
 @main.route('/')
 def index():
@@ -89,6 +91,7 @@ def new_blog():
         db.session.commit()
 
         title='New Blog'
+        
 
         return redirect(url_for('main.single_blog',id=blogpost.id))
 
@@ -196,12 +199,20 @@ def delete_comment(blogs_id):
 
 @main.route('/subscribe', methods=['GET','POST'])
 def subscriber():
+
    subscriber_form=SubscriberForm()
+
    if subscriber_form.validate_on_submit():
-       subscriber= Subscriber(email=subscriber_form.email.data,title = subscriber_form.title.data)
+
+       subscriber= Subscriber(email=subscriber_form.email.data,name = subscriber_form.name.data)
+
        db.session.add(subscriber)
        db.session.commit()
+
        mail_message("Hello, Welcome To Emdee's Blog.","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
+
    subscriber = Blogs.query.all()
+
    blog = Blogs.query.all()
+
    return render_template('subscribe.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)

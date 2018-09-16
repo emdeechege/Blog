@@ -42,7 +42,7 @@ class Blogs(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(255))
     topic = db.Column(db.String(255))
-    content = db.Column(db.String(255))
+    content = db.Column(db.String())
     date = db.Column(db.DateTime(250), default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     comments = db.relationship('Comments', backref='title', lazy='dynamic')
@@ -100,7 +100,6 @@ class Subscriber(UserMixin, db.Model):
 
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(255))
-   title = db.Column(db.String(255))
    email = db.Column(db.String(255),unique = True,index = True)
 
 

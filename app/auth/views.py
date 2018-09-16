@@ -37,7 +37,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        mail_message("Welcome to Emdee's Blog!","email/welcome_user",user.email,user=user)
+        
 
         title = "New Account"
 

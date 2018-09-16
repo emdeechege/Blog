@@ -3,15 +3,17 @@
 
 {% block content %}
 <br>
-<br>
+
 <div class="container">
+  <div style="width: 60%; height:50%">
+
+
 <br>
-<br>
-  {{ wtf.quick_form(blogpost_form) }}
+  {{ wtf.quick_form(blogpost_form) }}{{simplemde.load}}
 
 
 </div>
 
-
+</div>
 
 {% endblock %}

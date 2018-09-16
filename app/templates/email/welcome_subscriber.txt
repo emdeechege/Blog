@@ -1,4 +1,4 @@
-Hello {{user.author}},
+Hello,
 
 Welcome to Emdee's blog!
 
