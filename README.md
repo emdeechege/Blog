@@ -10,20 +10,33 @@ an application that allows users to use that one minute wisely. The users will s
 These are the behaviours/features that the application implements for use by a user.
 
 As a user I would like to:
-* See the pitches other people have posted.
-* submit a pitch in any category.
-* be signed in for me to leave a comment
-* view the pitches I have created in my profile page.
+* View the blog posts submitted.
+* Comment on blog posts.
+* View the most recent posts
+* Alerted when a new post is made by joining a subscription.
 * comment on the different pitches and leave feedback.
+
+## Blogger Abilities
+These are the behaviours/features that the application implements for use by the writter/Blogger
+
+Bloggers would like to:
+* Sign in to the blog
+* Create a blog from the application
+* Delete comments that I find insulting or degrading
+* Update or delete blogs I have created.
+
 
 ## Specifications
 | Behaviour | Input | Output |
 | :---------------- | :---------------: | ------------------: |
-| Display pitch categories | **On page load** | List of various categories of pitches |
-| Display tabs with  category | **On Tab link click** | Clickable links to open pitches by category |
+| Writer/Blogger Authentication | **On demand** | Access Admin dashboard |
+| Display blogs by most recent | **Home page** | Clickable links to open all blogs |
 | Display profile | **Click profile page** | Redirected to a page with your profile |
-| Display pitches | **On page load** | Each pitch displays author, title, pitch, date comment tab |
-| To add a pitch  | **Click an add pitch** | Redirected to the pitch collection form|
+| Display single blogs | **On link click** | Blog is displayed with comment ready function plus any comments already stored |
+| To add a blog  | **Through Admin dashboard** | Redirected to the new blog form collection form|
+| To edit a blog  | **Through Admin dashboard** | Redirected to the  blog form collection form and editing happens|
+| To delete a blog/comments  | **Through Admin dashboard and on displays** | Bad comments and posts can be deleted|
+| To subscribe  | **On button click** | Users can subscribe on click|
 
 
 ## SetUp / Installation Requirements
@@ -31,6 +44,7 @@ As a user I would like to:
 * python3.6
 * pip
 * virtualenv
+* Requirements.txt
 
 ### Cloning
 * In your terminal:
