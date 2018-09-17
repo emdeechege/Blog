@@ -203,19 +203,24 @@ def delete_comment(blogs_id):
 @main.route('/subscribe', methods=['GET','POST'])
 def subscriber():
 
-   subscriber_form=SubscriberForm()
+    subscriber_form=SubscriberForm()
+    blogs = Blogs.query.order_by(Blogs.date.desc()).all()
 
-   if subscriber_form.validate_on_submit():
+    if subscriber_form.validate_on_submit():
 
-       subscriber= Subscriber(email=subscriber_form.email.data,name = subscriber_form.name.data)
+        subscriber= Subscriber(email=subscriber_form.email.data,name = subscriber_form.name.data)
 
-       db.session.add(subscriber)
-       db.session.commit()
+        db.session.add(subscriber)
+        db.session.commit()
 
-       mail_message("Hello, Welcome To Emdee's Blog.","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
+        mail_message("Hello, Welcome To Emdee's Blog.","email/welcome_subscriber",subscriber.email,subscriber=subscriber)
 
-   subscriber = Blogs.query.all()
+        title= "Emdee's Blog"
+        return render_template('index.html',title=title, blogs=blogs)
 
-   blog = Blogs.query.all()
+    subscriber = Blogs.query.all()
 
-   return render_template('subscribe.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)
+    blog = Blogs.query.all()
+
+
+    return render_template('subscribe.html',subscriber=subscriber,subscriber_form=subscriber_form,blog=blog)
