@@ -53,7 +53,7 @@ class CommentsModelTest(unittest.TestCase):
        self.assertEquals(self.new_comment.comment,'cross buns')
        self.assertEquals(self.new_comment.date_posted,'2018-09-09')
        self.assertEquals(self.new_comment.user_id, 2)
-       # self.assertEquals(self.new_comment.pitches_id, 4)
+       # self.assertEquals(self.new_comment.blogs_id, 4)
 
     def test_save_comment(self):
 
@@ -61,5 +61,20 @@ class CommentsModelTest(unittest.TestCase):
 
 class BlogsModelTest(unittest.TestCase):
 
-    def test_save_pitch(self):
+    def test_save_blog(self):
         self.assertTrue(len(Blogs.query.all())>0)
+
+
+
+class SubscriberModelTest(unittest.TestCase):
+
+    def setUp(self):
+        self.new_subscriber = Subscriber(id = 1 , name = 'Gun', email = 'he@she.men')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_subscriber,Subscriber))
+
+    def test_variables(self):
+        self.assertEquals(self.new_subscriber.id, 1)
+        self.assertEquals(self.new_subscriber.name, 'Gun')
+        self.assertEquals(self.new_subscriber.email, 'he@she.men')
