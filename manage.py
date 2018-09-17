@@ -5,6 +5,8 @@ from app.models import *
 
 
 app = create_app('production')
+# app = create_app('development')
+
 
 
 
