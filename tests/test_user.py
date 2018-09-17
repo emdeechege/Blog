@@ -65,7 +65,6 @@ class BlogsModelTest(unittest.TestCase):
         self.assertTrue(len(Blogs.query.all())>0)
 
 
-
 class SubscriberModelTest(unittest.TestCase):
 
     def setUp(self):
